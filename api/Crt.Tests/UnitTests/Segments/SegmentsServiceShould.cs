@@ -35,7 +35,7 @@ namespace Crt.Tests.UnitTests.Segments
 
         [Theory]
         [AutoMoqData]
-        public void FailCreateWhenRouteHasSinglePoint(SegmentCreateDto segmentCreateDto,
+        public void CreateWhenRouteHasSinglePoint(SegmentCreateDto segmentCreateDto,
             [Frozen] Mock<IUnitOfWork> mockUnitOfWork,
             SegmentService sut)
         {
@@ -47,8 +47,8 @@ namespace Crt.Tests.UnitTests.Segments
             var result = sut.CreateSegmentAsync(segmentCreateDto).Result;
 
             //assert
-            Assert.NotEmpty(result.errors);
-            mockUnitOfWork.Verify(x => x.Commit(), Times.Never);
+            Assert.Empty(result.errors);
+            mockUnitOfWork.Verify(x => x.Commit(), Times.Once);
         }
 
         [Theory]

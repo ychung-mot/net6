@@ -32,7 +32,7 @@ namespace Crt.Tests.UnitTests.CodeTable
 
             //assert
             Assert.Empty(result.errors);
-            mockUnitOfWork.Verify(x => x.Commit(), Times.Once);
+            mockUnitOfWork.Verify(x => x.Commit(), Times.Exactly(2));
         }
 
         [Theory]
@@ -72,7 +72,7 @@ namespace Crt.Tests.UnitTests.CodeTable
 
             //assert
             Assert.Empty(result.errors);
-            mockUnitOfWork.Verify(x => x.Commit(), Times.Once);
+            mockUnitOfWork.Verify(x => x.Commit(), Times.Exactly(2));
         }
 
         [Theory]

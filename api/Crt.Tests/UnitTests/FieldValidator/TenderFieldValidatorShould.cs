@@ -43,9 +43,9 @@ namespace Crt.Tests.UnitTests.FieldValidator
                 TenderNumber = "T001-P001",
                 PlannedDate = DateTime.Now.Date,
                 ActualDate = DateTime.Now.Date,
-                TenderValue = 50000.00M,
+                TenderValue = 50000M,
                 WinningCntrctrLkupId = CodeLookup.WinningCntrctrLkupId,
-                BidValue = 45000.00M,
+                BidValue = 45000M,
                 Comment = "Test Valid Comment",
                 EndDate = null
             };
