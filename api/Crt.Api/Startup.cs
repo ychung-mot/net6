@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Crt.Api.Middlewares;
+using Serilog.Ui.Web;
+using Serilog.Ui.PostgreSqlProvider.Extensions;
 
 namespace Crt.Api
 {
@@ -39,6 +41,7 @@ namespace Crt.Api
             services.AddCrtSwagger(_env);
             services.AddHttpClients(Configuration);
             services.AddCrtHealthCheck(connectionString);
+            services.AddSerilogUi(options => options.UseNpgSql(Configuration.GetValue<string>("ConnectionStrings:SERILOG"), "crt_log"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
@@ -52,6 +55,7 @@ namespace Crt.Api
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSerilogUi();
             app.UseMiddleware<ReverseProxyMiddleware>();
             app.UseCrtEndpoints();
             app.UseCrtSwagger(env, Configuration.GetSection("Constants:SwaggerApiUrl").Value);

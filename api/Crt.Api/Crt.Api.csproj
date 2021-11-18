@@ -38,7 +38,11 @@
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+	<PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
+	<PackageReference Include="Serilog.Sinks.PostgreSQL.Configuration" Version="1.0.1" />
+	<PackageReference Include="Serilog.UI" Version="2.1.0" />
+	<PackageReference Include="Serilog.UI.PostgreSqlProvider" Version="2.1.0" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
   </ItemGroup>
   
@@ -47,7 +51,6 @@
     <ProjectReference Include="..\Crt.Data\Crt.Data.csproj" />
     <ProjectReference Include="..\Crt.Domain\Crt.Domain.csproj" />
     <ProjectReference Include="..\Crt.Model\Crt.Model.csproj" />
-    <ProjectReference Include="..\Serilog.Sinks.CrtPostgreSql\Serilog.Sinks.CrtPostgreSql.csproj" />
   </ItemGroup>
 
 </Project>
