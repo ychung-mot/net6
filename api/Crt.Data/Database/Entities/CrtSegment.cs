@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using NetTopologySuite.Geometries;
 
-#nullable disable
-
 namespace Crt.Data.Database.Entities
 {
     public partial class CrtSegment
     {
         public decimal SegmentId { get; set; }
         public decimal ProjectId { get; set; }
+        /// <summary>
+        /// Segment description field which provides more information to better qualify the segment. It is stored and displayed on the project segment screen alongside the start and end coordinates
+        /// </summary>
         public string Description { get; set; }
         public decimal? StartLatitude { get; set; }
         public decimal? StartLongitude { get; set; }

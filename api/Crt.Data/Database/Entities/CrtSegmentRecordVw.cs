@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using NetTopologySuite.Geometries;
 
-#nullable disable
-
 namespace Crt.Data.Database.Entities
 {
     public partial class CrtSegmentRecordVw

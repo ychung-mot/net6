@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Crt.Data.Database.Entities
 {
+    /// <summary>
+    /// A range of lookup values used to decipher codes used in submissions to business legible values for reporting purposes.  As many code lookups share this table, views are available to join for reporting purposes.
+    /// </summary>
     public partial class CrtCodeLookup
     {
         public CrtCodeLookup()
@@ -26,18 +27,57 @@ namespace Crt.Data.Database.Entities
             CrtTenders = new HashSet<CrtTender>();
         }
 
+        /// <summary>
+        /// Unique identifier for a record.
+        /// </summary>
         public decimal CodeLookupId { get; set; }
+        /// <summary>
+        /// Unique identifier for a group of lookup codes.  A database view is available for each group for use in analytics.
+        /// </summary>
         public string CodeSet { get; set; }
+        /// <summary>
+        /// Display name or business name for a submission value.  These values are for display in analytical reporting.
+        /// </summary>
         public string CodeName { get; set; }
+        /// <summary>
+        /// Look up code values provided in submissions.   These values are used for validating submissions and for display of CODE NAMES in analytical reporting.  Values must be unique per CODE SET.
+        /// </summary>
         public string CodeValueText { get; set; }
+        /// <summary>
+        ///  Numeric enumeration values provided in submissions.   These values are used for validating submissions and for display of CODE NAMES in analytical reporting.  Values must be unique per CODE SET.
+        /// </summary>
         public decimal? CodeValueNum { get; set; }
+        /// <summary>
+        /// Specifies if the code value is text or numeric.
+        /// </summary>
         public string CodeValueFormat { get; set; }
+        /// <summary>
+        /// When displaying list of values, value can be used to present list in desired order.
+        /// </summary>
         public decimal? DisplayOrder { get; set; }
+        /// <summary>
+        /// The latest date submissions will be accepted.
+        /// </summary>
         public DateTime? EndDate { get; set; }
+        /// <summary>
+        /// Record under edit indicator used for optomisitc record contention management.  If number differs from start of edit, then user will be prompted to that record has been updated by someone else.
+        /// </summary>
         public long ConcurrencyControlNumber { get; set; }
+        /// <summary>
+        /// Named database user who created record
+        /// </summary>
         public string DbAuditCreateUserid { get; set; }
+        /// <summary>
+        /// Date and time record created in the database
+        /// </summary>
         public DateTime DbAuditCreateTimestamp { get; set; }
+        /// <summary>
+        /// Named database user who last updated record
+        /// </summary>
         public string DbAuditLastUpdateUserid { get; set; }
+        /// <summary>
+        /// Date and time record was last updated in the database.
+        /// </summary>
         public DateTime DbAuditLastUpdateTimestamp { get; set; }
 
         public virtual ICollection<CrtElement> CrtElementProgramCategoryLkups { get; set; }

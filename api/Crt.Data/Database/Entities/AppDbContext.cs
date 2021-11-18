@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
-#nullable disable
 
 namespace Crt.Data.Database.Entities
 {
@@ -28,8 +27,14 @@ namespace Crt.Data.Database.Entities
         public virtual DbSet<CrtNoteHist> CrtNoteHists { get; set; }
         public virtual DbSet<CrtPermission> CrtPermissions { get; set; }
         public virtual DbSet<CrtPermissionHist> CrtPermissionHists { get; set; }
+        public virtual DbSet<CrtPrjQtyAccomplishmentsVw> CrtPrjQtyAccomplishmentsVws { get; set; }
+        public virtual DbSet<CrtProgramProjectFinancialsVw> CrtProgramProjectFinancialsVws { get; set; }
         public virtual DbSet<CrtProject> CrtProjects { get; set; }
         public virtual DbSet<CrtProjectHist> CrtProjectHists { get; set; }
+        public virtual DbSet<CrtProjectNotesVw> CrtProjectNotesVws { get; set; }
+        public virtual DbSet<CrtProjectSegmentsVw> CrtProjectSegmentsVws { get; set; }
+        public virtual DbSet<CrtProjectTendersVw> CrtProjectTendersVws { get; set; }
+        public virtual DbSet<CrtProjectVw> CrtProjectVws { get; set; }
         public virtual DbSet<CrtQtyAccmp> CrtQtyAccmps { get; set; }
         public virtual DbSet<CrtQtyAccmpHist> CrtQtyAccmpHists { get; set; }
         public virtual DbSet<CrtRatio> CrtRatios { get; set; }
@@ -1290,6 +1295,206 @@ namespace Crt.Data.Database.Entities
                     .HasComment("Unique identifier for a record");
             });
 
+            modelBuilder.Entity<CrtPrjQtyAccomplishmentsVw>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("CRT_PRJ_QTY_ACCOMPLISHMENTS_VW");
+
+                entity.Property(e => e.ProjectId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("PROJECT_ID");
+
+                entity.Property(e => e.QtyAccmpActual)
+                    .HasColumnType("numeric(10, 3)")
+                    .HasColumnName("QTY_ACCMP_ACTUAL");
+
+                entity.Property(e => e.QtyAccmpCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("QTY_ACCMP_CODE");
+
+                entity.Property(e => e.QtyAccmpComment)
+                    .HasMaxLength(2000)
+                    .IsUnicode(false)
+                    .HasColumnName("QTY_ACCMP_COMMENT");
+
+                entity.Property(e => e.QtyAccmpDbAuditCreateTimestamp)
+                    .HasColumnType("datetime")
+                    .HasColumnName("QTY_ACCMP_DB_AUDIT_CREATE_TIMESTAMP");
+
+                entity.Property(e => e.QtyAccmpDbAuditLastUpdateTimestamp)
+                    .HasColumnType("datetime")
+                    .HasColumnName("QTY_ACCMP_DB_AUDIT_LAST_UPDATE_TIMESTAMP");
+
+                entity.Property(e => e.QtyAccmpDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("QTY_ACCMP_DESC");
+
+                entity.Property(e => e.QtyAccmpEndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("QTY_ACCMP_END_DATE");
+
+                entity.Property(e => e.QtyAccmpFiscalYear)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("QTY_ACCMP_FISCAL_YEAR");
+
+                entity.Property(e => e.QtyAccmpForecast)
+                    .HasColumnType("numeric(10, 3)")
+                    .HasColumnName("QTY_ACCMP_FORECAST");
+
+                entity.Property(e => e.QtyAccmpId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("QTY_ACCMP_ID");
+
+                entity.Property(e => e.QtyAccmpSchedule7)
+                    .HasColumnType("numeric(10, 3)")
+                    .HasColumnName("QTY_ACCMP_SCHEDULE7");
+
+                entity.Property(e => e.QtyAccmpType)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("QTY_ACCMP_TYPE");
+
+                entity.Property(e => e.UpdatedBy)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("UPDATED_BY");
+
+                entity.Property(e => e.UpdatedOn)
+                    .HasColumnType("datetime")
+                    .HasColumnName("UPDATED_ON");
+            });
+
+            modelBuilder.Entity<CrtProgramProjectFinancialsVw>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("CRT_PROGRAM_PROJECT_FINANCIALS_VW");
+
+                entity.Property(e => e.ElementId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("ELEMENT_ID");
+
+                entity.Property(e => e.FinTargetAmount)
+                    .HasColumnType("numeric(12, 2)")
+                    .HasColumnName("FIN_TARGET_AMOUNT");
+
+                entity.Property(e => e.FinTargetDbAuditCreateTimestamp)
+                    .HasColumnType("datetime")
+                    .HasColumnName("FIN_TARGET_DB_AUDIT_CREATE_TIMESTAMP");
+
+                entity.Property(e => e.FinTargetDbAuditLastUpdateTimestamp)
+                    .HasColumnType("datetime")
+                    .HasColumnName("FIN_TARGET_DB_AUDIT_LAST_UPDATE_TIMESTAMP");
+
+                entity.Property(e => e.FinTargetDescription)
+                    .HasMaxLength(2000)
+                    .IsUnicode(false)
+                    .HasColumnName("FIN_TARGET_DESCRIPTION");
+
+                entity.Property(e => e.FinTargetEndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("FIN_TARGET_END_DATE");
+
+                entity.Property(e => e.FinTargetFiscalYear)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("FIN_TARGET_FISCAL_YEAR");
+
+                entity.Property(e => e.FinTargetId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("FIN_TARGET_ID");
+
+                entity.Property(e => e.FinTargetPrgElement)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("FIN_TARGET_PRG_ELEMENT");
+
+                entity.Property(e => e.FinTargetPrgElementDescription)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("FIN_TARGET_PRG_ELEMENT_DESCRIPTION");
+
+                entity.Property(e => e.FinTargetServiceLineCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("FIN_TARGET_SERVICE_LINE_CODE");
+
+                entity.Property(e => e.FinTargetServiceLineDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("FIN_TARGET_SERVICE_LINE_DESC");
+
+                entity.Property(e => e.FundingTypeCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("FUNDING_TYPE_CODE");
+
+                entity.Property(e => e.FundingTypeDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("FUNDING_TYPE_DESC");
+
+                entity.Property(e => e.PrgCtgryCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PRG_CTGRY_CODE");
+
+                entity.Property(e => e.PrgElementEndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("PRG_ELEMENT_END_DATE");
+
+                entity.Property(e => e.PrjPhaseCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PRJ_PHASE_CODE");
+
+                entity.Property(e => e.PrjPhaseDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PRJ_PHASE_DESC");
+
+                entity.Property(e => e.ProgramCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PROGRAM_CODE");
+
+                entity.Property(e => e.ProgramDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PROGRAM_DESC");
+
+                entity.Property(e => e.ProgramGategory)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PROGRAM_GATEGORY");
+
+                entity.Property(e => e.ProgramLkupId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("PROGRAM_LKUP_ID");
+
+                entity.Property(e => e.ProjectId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("PROJECT_ID");
+
+                entity.Property(e => e.ServiceLineEndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SERVICE_LINE_END_DATE");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("UPDATED_BY");
+
+                entity.Property(e => e.UpdatedOn)
+                    .HasColumnType("datetime")
+                    .HasColumnName("UPDATED_ON");
+            });
+
             modelBuilder.Entity<CrtProject>(entity =>
             {
                 entity.HasKey(e => e.ProjectId)
@@ -1589,6 +1794,223 @@ namespace Crt.Data.Database.Entities
                     .HasMaxLength(2000)
                     .IsUnicode(false)
                     .HasColumnName("SCOPE");
+            });
+
+            modelBuilder.Entity<CrtProjectNotesVw>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("CRT_PROJECT_NOTES_VW");
+
+                entity.Property(e => e.AppCreateUserid)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("APP_CREATE_USERID");
+
+                entity.Property(e => e.NoteCreateDate)
+                    .HasColumnType("date")
+                    .HasColumnName("NOTE_CREATE_DATE");
+
+                entity.Property(e => e.NoteId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("NOTE_ID");
+
+                entity.Property(e => e.NoteType)
+                    .HasMaxLength(9)
+                    .IsUnicode(false)
+                    .HasColumnName("NOTE_TYPE");
+
+                entity.Property(e => e.Notes)
+                    .IsUnicode(false)
+                    .HasColumnName("NOTES");
+
+                entity.Property(e => e.ProjectId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("PROJECT_ID");
+            });
+
+            modelBuilder.Entity<CrtProjectSegmentsVw>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("CRT_PROJECT_SEGMENTS_VW");
+
+                entity.Property(e => e.EndLatitude)
+                    .HasColumnType("numeric(16, 8)")
+                    .HasColumnName("END_LATITUDE");
+
+                entity.Property(e => e.EndLongitude)
+                    .HasColumnType("numeric(16, 8)")
+                    .HasColumnName("END_LONGITUDE");
+
+                entity.Property(e => e.Geometry)
+                    .HasColumnType("geometry")
+                    .HasColumnName("GEOMETRY");
+
+                entity.Property(e => e.ProjectId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("PROJECT_ID");
+
+                entity.Property(e => e.SegmentDescription)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("SEGMENT_DESCRIPTION");
+
+                entity.Property(e => e.SegmentId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("SEGMENT_ID");
+
+                entity.Property(e => e.StartLatitude)
+                    .HasColumnType("numeric(16, 8)")
+                    .HasColumnName("START_LATITUDE");
+
+                entity.Property(e => e.StartLongitude)
+                    .HasColumnType("numeric(16, 8)")
+                    .HasColumnName("START_LONGITUDE");
+            });
+
+            modelBuilder.Entity<CrtProjectTendersVw>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("CRT_PROJECT_TENDERS_VW");
+
+                entity.Property(e => e.ActualDate)
+                    .HasColumnType("date")
+                    .HasColumnName("ACTUAL_DATE");
+
+                entity.Property(e => e.BidValue)
+                    .HasColumnType("numeric(12, 2)")
+                    .HasColumnName("BID_VALUE");
+
+                entity.Property(e => e.PlannedDate)
+                    .HasColumnType("date")
+                    .HasColumnName("PLANNED_DATE");
+
+                entity.Property(e => e.ProjectId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("PROJECT_ID");
+
+                entity.Property(e => e.TenderComment)
+                    .HasMaxLength(2000)
+                    .IsUnicode(false)
+                    .HasColumnName("TENDER_COMMENT");
+
+                entity.Property(e => e.TenderId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("TENDER_ID");
+
+                entity.Property(e => e.TenderNumber)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("TENDER_NUMBER");
+
+                entity.Property(e => e.TenderValue)
+                    .HasColumnType("numeric(12, 2)")
+                    .HasColumnName("TENDER_VALUE");
+
+                entity.Property(e => e.WinningContractor)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("WINNING_CONTRACTOR");
+            });
+
+            modelBuilder.Entity<CrtProjectVw>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("CRT_PROJECT_VW");
+
+                entity.Property(e => e.AnncmentComment)
+                    .IsUnicode(false)
+                    .HasColumnName("ANNCMENT_COMMENT");
+
+                entity.Property(e => e.AnncmentValue)
+                    .HasColumnType("numeric(12, 2)")
+                    .HasColumnName("ANNCMENT_VALUE");
+
+                entity.Property(e => e.C035Value)
+                    .HasColumnType("numeric(12, 2)")
+                    .HasColumnName("C035_VALUE");
+
+                entity.Property(e => e.CapIndxCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("CAP_INDX_CODE");
+
+                entity.Property(e => e.CapIndxDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("CAP_INDX_DESC");
+
+                entity.Property(e => e.EstimatedValue)
+                    .HasColumnType("numeric(12, 2)")
+                    .HasColumnName("ESTIMATED_VALUE");
+
+                entity.Property(e => e.NearestTwnCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("NEAREST_TWN_CODE");
+
+                entity.Property(e => e.NearestTwnDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("NEAREST_TWN_DESC");
+
+                entity.Property(e => e.PrjDescription)
+                    .HasMaxLength(2000)
+                    .IsUnicode(false)
+                    .HasColumnName("PRJ_DESCRIPTION");
+
+                entity.Property(e => e.PrjScope)
+                    .HasMaxLength(2000)
+                    .IsUnicode(false)
+                    .HasColumnName("PRJ_SCOPE");
+
+                entity.Property(e => e.ProjectId)
+                    .HasColumnType("numeric(9, 0)")
+                    .HasColumnName("PROJECT_ID");
+
+                entity.Property(e => e.ProjectMgrCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PROJECT_MGR_CODE");
+
+                entity.Property(e => e.ProjectMgrDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PROJECT_MGR_DESC");
+
+                entity.Property(e => e.ProjectName)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("PROJECT_NAME");
+
+                entity.Property(e => e.ProjectNumber)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("PROJECT_NUMBER");
+
+                entity.Property(e => e.RcCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("RC_CODE");
+
+                entity.Property(e => e.RcDesc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("RC_DESC");
+
+                entity.Property(e => e.RegionName)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("REGION_NAME");
+
+                entity.Property(e => e.RegionNumber)
+                    .HasColumnType("numeric(2, 0)")
+                    .HasColumnName("REGION_NUMBER");
             });
 
             modelBuilder.Entity<CrtQtyAccmp>(entity =>

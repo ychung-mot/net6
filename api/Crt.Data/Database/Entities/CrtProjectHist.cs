@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Crt.Data.Database.Entities
 {
     public partial class CrtProjectHist
@@ -20,6 +18,9 @@ namespace Crt.Data.Database.Entities
         public decimal? ProjectMgrLkupId { get; set; }
         public decimal? AnncmentValue { get; set; }
         public decimal? C035Value { get; set; }
+        /// <summary>
+        /// Project Value determined through available information, in the absence of formal announcement and/or C-035 Values
+        /// </summary>
         public decimal? EstimatedValue { get; set; }
         public string AnncmentComment { get; set; }
         public DateTime? EndDate { get; set; }

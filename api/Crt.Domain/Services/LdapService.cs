@@ -31,19 +31,19 @@ namespace Crt.Domain.Services
         }
         public AdAccount LdapSearch(string filterAttr, string value)
         {
-            using var conn = new LdapConnection() { SecureSocketLayer = false };
-            conn.Connect(_server, _port);
+            var options = new LdapConnectionOptions()
+                .ConfigureRemoteCertificateValidationCallback((sender, certificate, chain, sslPolicyErrors) => {
+                    if (sslPolicyErrors == SslPolicyErrors.None)
+                        return true;
 
-            conn.UserDefinedServerCertValidationDelegate += (sender, certificate, chain, sslPolicyErrors) =>
-            {
-                if (sslPolicyErrors == SslPolicyErrors.None)
+                    if (chain.ChainElements == null)
+                        return false;
+
                     return true;
-
-                if (chain.ChainElements == null)
-                    return false;
-
-                return true;
-            };
+                });
+                
+            using var conn = new LdapConnection(options) { SecureSocketLayer = false };
+            conn.Connect(_server, _port);
 
             conn.StartTls();
 
