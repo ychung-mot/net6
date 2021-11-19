@@ -28,13 +28,6 @@ namespace Crt.Data.Database.Entities
             _config = config;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder
-                .UseSqlServer(_config.GetValue<string>("ConnectionStrings:CRT"), o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-        }
-
         public override int SaveChanges()
         {
             PerformAudit();
